@@ -1,5 +1,3 @@
-package com.jidesoft;
-
 import java.sql.DriverManager;
 import oracle.jdbc.OracleDriver;
 import java.sql.*;
@@ -34,9 +32,8 @@ public class scratch_1 {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            //第六步：关闭资源
             System.out.println(str[i]);
-            JFrame jFrame1 = new JFrame();
+            JFrame jFrame1 = new JFrame();//创建一个JFrame实例
             jFrame1.setSize(400, 400);
             JideLabel jideLabel1 = new JideLabel(str[i]);
             jFrame1.add(jideLabel1);
