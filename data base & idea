@@ -19,8 +19,6 @@ public class scratch_1 {
             System.out.println(connect);
             statement = connect.createStatement();
             resultSet = statement.executeQuery("select  * from test");
-
-
             while (resultSet.next()) {
                 String id = resultSet.getString("id");
                 String name = resultSet.getString("name");
@@ -28,7 +26,6 @@ public class scratch_1 {
                 str[i+1] = str[i] + id + "   " + name + "   " + city + '\n';
                 i++;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -48,7 +45,5 @@ public class scratch_1 {
                 e.printStackTrace();
             }
         }
-
-
     }
 }
