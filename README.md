@@ -1,2 +1,2 @@
 # Jide_demo
-just a demo for learning JIDE
+just for learning JIDE
