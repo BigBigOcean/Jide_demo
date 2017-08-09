@@ -1,2 +1,2 @@
 # Jide_demo
-just for learning JIDE
+just for learning JAVA
