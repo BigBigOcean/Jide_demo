@@ -1,0 +1,57 @@
+package com.jidesoft;
+
+import java.sql.DriverManager;
+import oracle.jdbc.OracleDriver;
+import java.sql.*;
+import com.jidesoft.plaf.LookAndFeelFactory;
+import com.jidesoft.swing.JideLabel;
+import javax.swing.*;
+
+public class scratch_1 {
+    public static void main(String[] args) {
+        Connection connect = null;
+        LookAndFeelFactory.installDefaultLookAndFeelAndExtension();
+        Statement statement = null;
+        ResultSet resultSet = null;
+        int i = 0;
+        String[] str = new String[]{"", "", "", "", ""};
+        try {
+            Class.forName("oracle.jdbc.OracleDriver");
+            connect = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:test", "system", "Aa2010168");
+            System.out.println(connect);
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("select  * from test");
+
+
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String name = resultSet.getString("name");
+                String city = resultSet.getString("city");
+                str[i+1] = str[i] + id + "   " + name + "   " + city + '\n';
+                i++;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //第六步：关闭资源
+            System.out.println(str[i]);
+            JFrame jFrame1 = new JFrame();
+            jFrame1.setSize(400, 400);
+            JideLabel jideLabel1 = new JideLabel(str[i]);
+            jFrame1.add(jideLabel1);
+            jFrame1.setVisible(true);
+            jFrame1.setLocationRelativeTo(null);//窗体居中
+            jFrame1.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connect != null) connect.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+}
