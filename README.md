@@ -1,2 +1,2 @@
-# Just some demos
+# Just some codes
 for learning JAVA
