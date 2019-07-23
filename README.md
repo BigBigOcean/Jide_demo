@@ -130,3 +130,11 @@ PreparedStatement是预编译的，使用PreparedStatement有几个好处
 3.  对于多次重复执行的语句，使用PreparedStament效率会更高一点，并且在这种情况下也比较适合使用batch；  
 4.  代码的可读性和可维护性。
 
+java 转型问题其实并不复杂，只要记住一句话：父类引用指向子类对象。子类引用不能指向父类对象。
+向上转型：
+https://blog.csdn.net/u013457570/article/details/51311871
+对比：
+https://blog.csdn.net/eqiang8271/article/details/20717613
+情况分类：
+https://blog.csdn.net/u013457570/article/details/51311871
+
