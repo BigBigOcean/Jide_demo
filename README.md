@@ -138,3 +138,50 @@ https://blog.csdn.net/eqiang8271/article/details/20717613
 情况分类：
 https://blog.csdn.net/u013457570/article/details/51311871
 
+FileOutputStream 是字节流，它一个字节一个字节的向外边送数据
+OutputStreamWrite是字符流，它一个字符一个字符的向外边送数据
+它们有什么区别么？
+解析：
+      因为计算机是洋鬼子发明的，它们的英文字符占一个字节，而我们的中文是一个字符，占俩字节。
+     如果用stream，你读出来的英语再倒也罢了，读出来的中文可就是乱码或者一个个“？？？？”。
+     如果你用WRITER，就不会有乱码了，明白？
+BufferedWriter  Buffer是一个缓冲区，为什么要用BUFFER呢？
+    如果你直接用stream或者writer，你的硬盘可能就是一个字符或者一个字节    读写硬盘一次，
+可是你用了Buffer，你的硬盘就是读了一堆数据之后，读写一下硬盘。这样对你硬盘有好处。
+
+关于finally执行：
+https://blog.csdn.net/Dove_Knowledge/article/details/71077512
+1.执行try里面的return也会执行finally里面的语句
+2.finally里面的return会覆盖前面的return
+3.如果碰到system的exit语句或者在进入try之前就发生了语法错误中断程序，则finally不会执行
+
+尽量不要做字符转化，因为UTF8转GBK再转回UTF8会造成乱码
+
+Java的正则表达式：
+pattern代表一个正则词，march是判断匹配；
+match的判断方法可以有matches和lookingAt，前者是全匹配，后者是包含匹配
+*表示*前面的字符可以有零个或者多个
+
+为什么main方法是静态的（static）
+
+正因为main方法是静态的，JVM调用这个方法就不需要创建任何包含这个main方法的实例。
+因为C和C++同样有类似的main方法作为程序执行的入口。
+如果main方法不声明为静态的，JVM就必须创建main类的实例，因为构造器可以被重载，JVM就没法确定调用哪个main方法。
+静态方法和静态数据加载到内存就可以直接调用而不需要像实例方法一样创建实例后才能调用，如果main方法是静态的，那么它就会被加载到JVM上下文中成为可执行的方法。
+
+为什么main方法是公有的（public）
+Java指定了一些可访问的修饰符如：private、protected、public，任何方法或变量都可以声明为public，Java可以从该类之外的地方访问。因为main方法是公共的，JVM就可以轻松的访问执行它。
+
+为什么main方法没有返回值（Void） 
+因为main返回任何值对程序都没任何意义，所以设计成void，意味着main不会有任何值返回
+
+JAVA动态数组：
+ArrayList List = new ArrayList(); 
+for( int i=0;i <10;i++ ) //给数组增加10个Int元素 
+List.Add(i); 
+//..程序做一些处理 
+List.RemoveAt(5);//将第6个元素移除 
+for( int i=0;i <3;i++ ) //再增加3个元素 
+List.Add(i+20); 
+Int32[] values = (Int32[])List.ToArray(typeof(Int32));//返回ArrayList包含的数组
+
