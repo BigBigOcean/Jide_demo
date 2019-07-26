@@ -1,6 +1,9 @@
 # Just some notes
 for learning JAVA
 
+jsonObject是多个键值对；
+JsonArray是多个jsonObject（用中括号包住）
+
 length——数组的属性；
 length()——String的方法；
 size()——集合的方法
