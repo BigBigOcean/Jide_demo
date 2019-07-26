@@ -3,6 +3,18 @@ for learning JAVA
 
 jsonObject是多个键值对；
 JsonArray是多个jsonObject（用中括号包住）
+JAVA的json处理方法：
+1.org.json（官方，put和get不方便）
+2.GSON（Google推出，比json方便很多，可以直接用toJson从java对象转为json对象，反过来有fromjson）
+3.Jackson（最快）
+
+put、get
+
+JAVA bean：
+1.无参数构造函数
+2.有setter、getter
+3.所有属性都是private
+4.JAVA bean又称为POJO
 
 length——数组的属性；
 length()——String的方法；
@@ -81,7 +93,8 @@ put         添加一个元素                    �
 
 抽象方法不能有方法体，只能申明
 
-接口中的属性在不提供修饰符修饰的情况下，会自动加上public static final
+接口中的属性在不提供修饰符修饰的情况下，会自动加上
+static final
 
 flush（）函数强制将缓冲区中的字符流、字节流等输出，目的是如果输出流输出到缓冲区完成后，缓冲区并没有填满，那么缓冲区将会一直等待被填满。所以在关闭输出流之前要调用flush（）。
 
@@ -188,3 +201,40 @@ for( int i=0;i <3;i++ ) //再增加3个元素
 List.Add(i+20); 
 Int32[] values = (Int32[])List.ToArray(typeof(Int32));//返回ArrayList包含的数组
 
+JAVA的四个主要接口：
+Clonable，用于对象克隆
+Comparable，用于对象比较
+Serializable，用于对象序列化
+Runnable，用于对象线程化
+
+JAVA多线程创建：
+1.java.lang.Thread
+·线程继承Thread类，实现run方法
+public class Thread1 extends Thread{}
+调用（直接调用）：
+new Thread1.start();
+
+2.java.lang.Runnable接口
+·线程实现Runnable接口
+public class Thread2 implements Runnable{}
+调用（借用Thread类来调用）：
+new Thread(new Thread2()).start();
+
+从运行的结果，我们可以看出。实现Runnable接口，只创建了一个类的实例，而且被多个线程共享了。
+即相当于实现了多线程中的资源共享
+因此Counter递增。而继承Thread类，你必须为每一个线程创建不同的实例。因此每个类的实例分配了不同的内存空间，每一个有不同的Counter，它们的值相同。这意味着没有增加因为没有一个对象的引用是相同的。
+那什么时候用Runnable接口呢？
+当你想要在一组线程中访问相同的资源时，使用Runnable接口。在这种情况下要避免使用Thread类，因为多对象的创建会占用更多的内存，会导致大的性能花费。
+PS:Thread类内部实现了Runnable接口
+最后，哪种方式最好用呢？
+显而易见，当然是实现Runnable接口更好。
+
+启动线程：
+·start方法，会自动以新进程调用run方法（public void run()）
+·一个线程只能start一次，以第一个start为标准，后面的start会报错
+·直接调用run方法会变成串行执行
+·多个线程的启动顺序是随机的
+·线程无需关闭，run方法结束之后就自动关闭
+·main函数可能早于线程结束（因为main函数只不过是一个主线程）
+·整个程序的终止是等所有线程都终止
+·不能直接对实现了Runnable接口的对象进行start方法
