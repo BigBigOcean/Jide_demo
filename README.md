@@ -212,7 +212,7 @@ JAVA多线程创建：
 ·线程继承Thread类，实现run方法
 public class Thread1 extends Thread{}
 调用（直接调用）：
-new Thread1.start();
+new Thread1().start();
 
 2.java.lang.Runnable接口
 ·线程实现Runnable接口
@@ -238,3 +238,34 @@ PS:Thread类内部实现了Runnable接口
 ·main函数可能早于线程结束（因为main函数只不过是一个主线程）
 ·整个程序的终止是等所有线程都终止
 ·不能直接对实现了Runnable接口的对象进行start方法
+
+线程信息共享：
+1.static
+2.同一个Runnable类的成员变量
+
+当前线程：Thread.currentThread().getName()
+
+如果线程是继承Thread类来创建的，那么信息共享只能通过static定义来实现（会有误差）
+
+volatile声明的变量，可以用来确保将变量的更新操作通知到其他线程
+例如死循环的线程里读了Flag为true，一直i++。如果main函数里修改flag为false，会无效，因为线程里的flag是工作缓存里的flag，看不到全局修改后的flag。用volatile声明变量之后，修改可以看得见。
+
+关键步骤加锁限制：
+1.互斥：synchronized（同步），其他线程不能同时运行
+2.同步：多个线程按顺序运行
+例：
+sale();
+public synchronized void sale(){i--}
+
+线程状态：
+NEW--刚创建（new）
+RUNNABLE--就绪态（start）--还没运行，在等待CPU分配系统资源
+RUNNING--运行中（run）
+BLOCK--阻塞（sleep）
+TERMINATED--结束
+
+JAVA并发编程：
+1.Thread/Runnable/ThreadGroup组管理
+2.Executor
+3.Fork-Join框架
+
