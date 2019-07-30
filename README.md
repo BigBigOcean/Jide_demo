@@ -160,7 +160,7 @@ OutputStreamWrite是字符流，它一个字符一个字符的向外边送数据
 解析：
       因为计算机是洋鬼子发明的，它们的英文字符占一个字节，而我们的中文是一个字符，占俩字节。
      如果用stream，你读出来的英语再倒也罢了，读出来的中文可就是乱码或者一个个“？？？？”。
-     如果你用WRITER，就不会有乱码了，明白？
+     如果你用WRITER，就不会有乱码了
 BufferedWriter  Buffer是一个缓冲区，为什么要用BUFFER呢？
     如果你直接用stream或者writer，你的硬盘可能就是一个字符或者一个字节    读写硬盘一次，
 可是你用了Buffer，你的硬盘就是读了一堆数据之后，读写一下硬盘。这样对你硬盘有好处。
@@ -267,5 +267,22 @@ TERMINATED--结束
 JAVA并发编程：
 1.Thread/Runnable/ThreadGroup组管理
 2.Executor
-3.Fork-Join框架
+3.Fork-Join框架（类似归并，二分拆开，递归执行，最后合并）
+（后两者有一个共享的线程池pool）
+（每个线程都是独立的，缺少协作）
 
+多线程任务中部分数据结构不安全，如ArrayList,HashMap,HashSet
+线程不安全例子：
+List<String> unsafeList = new ArrayList<String>();
+线程安全例子：
+List<String> safeList = Collections.synchronizedList(new ArrayList<String>());
+（用Collections.synchronized包住）
+
+实现线程协作的例子——读写分离：一个线程写，多个线程读
+
+java的定时器timer继承了runnable接口，本质上是一个线程
+timer.schedule、timer.scheduleAtFixedRate
+
+Executor+定时器：ScheduledExecutorService
+
+完善的定时器：quartz
